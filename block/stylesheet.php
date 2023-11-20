@@ -13,7 +13,12 @@
         padding: 50px 0;
         border-radius: 10px;
     }
-
+.img-avatar {
+    border-radius: 100%;
+    object-fit: cover;
+    height: 70px;
+    width: 70px;
+}
 .inscription{
     width: 40%;
 }
@@ -22,6 +27,7 @@ form{
     flex-direction: column;
     width: 80%;
     margin: auto;
+    position: relative;
 }
     input{
         margin: 8px;
@@ -34,6 +40,12 @@ form{
         width: 46%;
         margin-top: 23px;
         padding: 10px;
+    }
+    #eyes,#eyes-close{
+        position: absolute;
+        bottom: 76px;
+        right: 7px;
+    }
     }
 </style>
 

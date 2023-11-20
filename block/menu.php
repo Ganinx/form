@@ -26,11 +26,12 @@ $firstName = 'Valentin';
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
                 <?php
                 if(array_key_exists("identifiant",$_SESSION)){
                     echo('<a> bonjour '.$_SESSION["identifiant"]. '</a>');
-                    echo('<a href="moncompte.php" class="px-4 nav-link"> Mon compte</a>');
+                    echo('<a href="moncompte.php" class="ps-4 pe-2 nav-link"> Mon compte</a>');
+                    echo('<img class="img-avatar me-4" src="image/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg">');
                     echo('<a href="deconnexion.php" class="nav-link">deconnexion</a>');
                 }elseif(!array_key_exists("identifiant",$_SESSION)){
                     echo('<a class= "nav-link pe-3" href="connection.php">Connexion</a>');
