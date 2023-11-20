@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+if(!array_key_exists("identifiant",$_SESSION)){
+    header("Location: connection.php");
+}
 ?>
 
 <!doctype html>
@@ -12,7 +16,6 @@ session_start();
     <title>Vegeta</title>
     <?php
     include'block/stylesheet.php';
-    var_dump($_SESSION);
     ?>
 <body>
 <?php

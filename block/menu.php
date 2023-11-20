@@ -29,10 +29,14 @@ $firstName = 'Valentin';
             <div class="d-flex">
                 <?php
                 if(array_key_exists("identifiant",$_SESSION)){
-                    echo('<p> bonjour'.$_SESSION["identifiant"].'</p>');
-                }
+                    echo('<a> bonjour '.$_SESSION["identifiant"]. '</a>');
+                    echo('<a href="moncompte.php" class="px-4 nav-link"> Mon compte</a>');
+                    echo('<a href="deconnexion.php" class="nav-link">deconnexion</a>');
+                }elseif(!array_key_exists("identifiant",$_SESSION)){
                     echo('<a class= "nav-link pe-3" href="connection.php">Connexion</a>');
                     echo('<a class= "nav-link " href="inscription.php">Inscription</a>');
+                }
+
 
                 ?>
             </div>
