@@ -35,13 +35,14 @@
         if(strlen($_POST["mail"])< 3){
             $errors['mail'] = "pas assez de lettres";
         }
+        if(!filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
+
+           $errors['mail'] = "est considérée comme invalide.";
+        }
     }
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         if(empty($_POST["creaPswd"])){
             $errors["creaPswd"] = "veuillez saisir un identifiant";
-        }
-        if(strlen($_POST["creaPswd"])< 3){
-            $errors['creaPswd'] = "pas assez de lettres";
         }
         if(!preg_match($pattern,$_POST['creaPswd'])) {
           $errors['creaPswd'] = "pas bon la aussi";
@@ -61,6 +62,10 @@
         }
         if($_POST["creaPswd"] !=$_POST["pswd"] ){
             $errors["pswd"] = "veuillez saisir le meme mot de passe";
+        }
+        if(count($errors) ==0){
+            header('location:moncompte.php');
+            exit();
         }
     }
     ?>
@@ -82,6 +87,8 @@
         ?>" class="form-control <?php
         if(array_key_exists("nom",$errors)){
             echo('is-invalid');
+        }elseif($_SERVER["REQUEST_METHOD"] == 'POST'){
+            echo('is-valid');
         }
         ?>" name="nom">
         <div class="invalid-feedback">
@@ -97,9 +104,11 @@
             echo($_POST['prenom']);
         }
 
-        ?>" class="from-control <?php
+        ?>" class="form-control <?php
         if(array_key_exists("prenom",$errors)){
             echo('is-invalid');
+        }elseif($_SERVER["REQUEST_METHOD"] == 'POST'){
+            echo('is-valid');
         }
         ?>" name="prenom">
         <div class="invalid-feedback">
@@ -110,21 +119,22 @@
             ?>
         </div>
         <label for="mail">Adresse mail</label>
-        <input type="email" value="<?php
+        <input type="text" value="<?php
         if(!empty($_POST['mail'])){
             echo($_POST['mail']);
         }
 
-        ?>" class="<?php
+        ?>" class="form-control <?php
         if(array_key_exists("mail",$errors)){
             echo('is-invalid');
+        }elseif($_SERVER["REQUEST_METHOD"] == 'POST'){
+            echo('is-valid');
         }
         ?>" name="mail">
         <div class="invalid-feedback">
             <?php
-            if(filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
-            } else {
-            echo ("L'adresse email ".$_POST["mail"]." est considérée comme invalide.");
+            if(array_key_exists("mail",$errors)){
+                echo($errors["mail"]);
             }
             ?>
         </div>
@@ -137,6 +147,8 @@
         ?>" class="form-control <?php
         if(array_key_exists("creaPswd",$errors)){
             echo('is-invalid');
+        }elseif($_SERVER["REQUEST_METHOD"] == 'POST'){
+            echo('is-valid');
         }
         ?>" name="creaPswd">
         <div class="invalid-feedback">
@@ -156,6 +168,8 @@
         ?>" class="form-control <?php
         if(array_key_exists("pswd",$errors)){
             echo('is-invalid');
+        }elseif($_SERVER["REQUEST_METHOD"] == 'POST'){
+            echo('is-valid');
         }
         ?>" name="pswd">
         <div class="invalid-feedback">

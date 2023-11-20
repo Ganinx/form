@@ -1,4 +1,19 @@
+<?php
+session_start();
 
+
+
+$erreur = '';
+if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+    if ($_POST['identifiant'] == "valentin" && $_POST["pswd"] == "onepiece") {
+        $_SESSION['identifiant'] = "valentin";
+        header('Location: moncompte.php');
+        exit();
+    } else {
+        $erreur = "identifiant invalide";
+    }
+}
+?>
 
 
 <!doctype html>
@@ -24,22 +39,13 @@
     ?>
     <h1 class="text-center">Connexion</h1>
 </div>
-<?php
-include 'block/javascript.php'
+
+
+
+
+
 ?>
 <div class="formulaire">
-    <?php
-    include 'block/header.php';
-    $errors = [];
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
-        if(empty($_POST["identifiant"])){
-            $errors["identifiant"] = "veuillez saisir un identifiant";
-        };
-        if(strlen($_POST["identifiant"])< 3){
-            $errors['identifiant'] = "pas assez de lettres";
-        }
-    }
-    ?>
 <form method="post">
     <label for="identifiant">Identifiant</label>
     <input value="<?php
@@ -47,23 +53,21 @@ include 'block/javascript.php'
         echo($_POST['identifiant']);
     }
 
-    ?>" type="text" class="form-control <?php
-    if(array_key_exists("identifiant",$errors)){
-        echo('is-invalid');
-    }
-    ?>" name="identifiant">
-    <div class='invalid-feedback'>
+    ?>" type="text" class="form-control" name="identifiant">
+    <label for="pswd">Mot de passe</label>
+    <input type="password" name="pswd" class="form-control">
+    <div>
         <?php
-        if(array_key_exists("identifiant",$errors)){
-            echo($errors["identifiant"]);
+        if(!is_null($erreur)){
+            echo('<p class="text-danger">'.$erreur.'</p>');
         }
         ?>
     </div>
-    <label for="pswd">Mot de passe</label>
-    <input type="password" name="pswd">
     <input type="submit" name="verif">
 </form>
 </div>
-
+<?php
+include 'block/javascript.php';
+?>
 </body>
 </html>

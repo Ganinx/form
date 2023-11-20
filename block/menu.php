@@ -27,8 +27,14 @@ $firstName = 'Valentin';
                 </li>
             </ul>
             <div class="d-flex">
-                <a class= 'nav-link pe-3' href="connection.php">Connexion</a>
-                <a class= 'nav-link ' href="inscription.php">Inscription</a>
+                <?php
+                if(array_key_exists("identifiant",$_SESSION)){
+                    echo('<p> bonjour'.$_SESSION["identifiant"].'</p>');
+                }
+                    echo('<a class= "nav-link pe-3" href="connection.php">Connexion</a>');
+                    echo('<a class= "nav-link " href="inscription.php">Inscription</a>');
+
+                ?>
             </div>
         </div>
     </div>
