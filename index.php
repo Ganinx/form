@@ -1,5 +1,7 @@
 <?php
+include 'block/redirect.php';
 session_start();
+
 ?>
 
 <!doctype html>
@@ -14,7 +16,10 @@ session_start();
     include'block/stylesheet.php';
     ?>
 </head>
-<body>
+<body class="
+<?php
+include'block/theme.php'
+?>">
     <div class="container">
         <?php
         include 'block/header.php'
@@ -24,6 +29,13 @@ session_start();
         include 'block/menu.php'
         ?>
         <h1 class="text-center">Accueil</h1>
+
+        <?php
+        $images = scandir("image/")
+        for($i = 2; $i < count($images); $i++){
+            echo('<img src="'.$images[$i].'"><img>');
+        }
+        ?>
     </div>
     <?php
     include 'block/javascript.php'

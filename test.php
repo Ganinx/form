@@ -1,9 +1,3 @@
-<?php
-session_start();
-include'block/redirect.php'
-?>
-
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -13,6 +7,7 @@ include'block/redirect.php'
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Include</title>
     <?php
+
     include'block/stylesheet.php';
     ?>
     <?php
@@ -41,13 +36,14 @@ include'block/redirect.php'
         if(strlen($_POST["mail"])< 3){
             $errors['mail'] = "pas assez de lettres";
         }
+        if(!filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
+
+            $errors['mail'] = "est considérée comme invalide.";
+        }
     }
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         if(empty($_POST["creaPswd"])){
             $errors["creaPswd"] = "veuillez saisir un identifiant";
-        }
-        if(strlen($_POST["creaPswd"])< 3){
-            $errors['creaPswd'] = "pas assez de lettres";
         }
         if(!preg_match($pattern,$_POST['creaPswd'])) {
             $errors['creaPswd'] = "pas bon la aussi";
@@ -68,29 +64,27 @@ include'block/redirect.php'
         if($_POST["creaPswd"] !=$_POST["pswd"] ){
             $errors["pswd"] = "veuillez saisir le meme mot de passe";
         }
-    }
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
-        if(!empty($_POST["verif"])){
-            $errors["verif"] = "connection.php";
+        if(count($errors) ==0){
+            header('Location: moncompte.php');
+            exit();
         }
     }
+
+
+
     ?>
 </head>
-<body class="
-<?php
-include'block/theme.php'
-?>">
+<body>
 <div class="container">
     <?php
-    include 'block/menu.php'
+    include 'block/menu.php';
+
+
     ?>
     <h1 class="text-center">Inscription</h1>
     <div class="formulaire inscription">
-        <form method="post" action="<?php
-        if(array_key_exists("verif",$errors)){
-            echo($errors["verif"]);
-        }
-        ?>">
+        <form method="post">
+
             <label for="nom">Nom</label>
             <input type="text" value="<?php
             if(!empty($_POST['nom'])){
@@ -100,6 +94,8 @@ include'block/theme.php'
             ?>" class="form-control <?php
             if(array_key_exists("nom",$errors)){
                 echo('is-invalid');
+            }elseif($_SERVER["REQUEST_METHOD"] == 'POST'){
+                echo('is-valid');
             }
             ?>" name="nom">
             <div class="invalid-feedback">
@@ -115,9 +111,11 @@ include'block/theme.php'
                 echo($_POST['prenom']);
             }
 
-            ?>" class="from-control <?php
+            ?>" class="form-control <?php
             if(array_key_exists("prenom",$errors)){
                 echo('is-invalid');
+            }elseif($_SERVER["REQUEST_METHOD"] == 'POST'){
+                echo('is-valid');
             }
             ?>" name="prenom">
             <div class="invalid-feedback">
@@ -127,69 +125,19 @@ include'block/theme.php'
                 }
                 ?>
             </div>
-            <label for="mail">Adresse mail</label>
-            <input type="email" value="<?php
-            if(!empty($_POST['mail'])){
-                echo($_POST['mail']);
-            }
-
-            ?>" class="<?php
-            if(array_key_exists("mail",$errors)){
-                echo('is-invalid');
-            }
-            ?>" name="mail">
-            <div class="invalid-feedback">
-                <?php
-                if(filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
-                } else {
-                    echo ("L'adresse email ".$_POST["mail"]." est considérée comme invalide.");
-                }
-                ?>
-            </div>
-            <label for="creaPswd">Creer votre mot de passe</label>
-            <input type="password" value="<?php
-            if(!empty($_POST['creaPswd'])){
-                echo($_POST['creaPswd']);
-            }
-
-            ?>" class="form-control <?php
-            if(array_key_exists("creaPswd",$errors)){
-                echo('is-invalid');
-            }
-            ?>" name="creaPswd">
-            <div class="invalid-feedback">
-                <?php
-                if(array_key_exists("creaPswd",$errors)){
-                    echo($errors["creaPswd"]);
-                }
-                ?>
-
-            </div>
-            <label for="pswd">Confirmation</label>
-            <input type="password" value="<?php
-            if(!empty($_POST['pswd'])){
-                echo($_POST['pswd']);
-            }
-
-            ?>" class="form-control <?php
-            if(array_key_exists("pswd",$errors)){
-                echo('is-invalid');
-            }
-            ?>" name="pswd">
-            <div class="invalid-feedback">
-                <?php
-                if(array_key_exists("pswd",$errors)){
-                    echo($errors["pswd"]);
-                }
-                ?>
-            </div>
-            <input type="submit" name="verif">
+            <?php
+            var_dump(headers_sent());
+            var_dump(headers_sent());
+            var_dump(headers_sent());
+            var_dump(headers_sent());
+            ?>
         </form>
     </div>
 </div>
 <?php
-include'block/cookie-consent.php'
 
+include 'block/cookie-consent.php';
+include'block/javascript.php'
 ?>
 </body>
 </html>

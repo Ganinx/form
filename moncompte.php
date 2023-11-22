@@ -1,8 +1,11 @@
 <?php
 session_start();
+include'block/redirect.php';
+
 
 if(!array_key_exists("identifiant",$_SESSION)){
     header("Location: connection.php");
+    exit;
 }
 ?>
 
@@ -17,7 +20,10 @@ if(!array_key_exists("identifiant",$_SESSION)){
     <?php
     include'block/stylesheet.php';
     ?>
-<body>
+<body class="
+<?php
+include'block/theme.php'
+?>">
 <?php
 echo('<div class="container">');
 include 'block/header.php';

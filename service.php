@@ -1,5 +1,7 @@
 <?php
 session_start();
+include'block/redirect.php';
+
 
 $page = null;
 if(!array_key_exists("page",$_GET)){
@@ -97,7 +99,10 @@ $services = [
     ?>
     <title>Services</title>
 </head>
-<body>
+<body class="
+<?php
+include'block/theme.php'
+?>">
 <?php
 include'block/header.php';
 include'block/menu.php';

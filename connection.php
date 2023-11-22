@@ -1,5 +1,7 @@
 <?php
 session_start();
+include'block/redirect.php';
+
 $erreur = '';
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     if ($_POST['identifiant'] == "valentin" && $_POST["pswd"] == "onepiece") {
@@ -25,7 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     include'block/stylesheet.php';
     ?>
 </head>
-<body>
+<body class="
+<?php
+include'block/theme.php'
+?>">
 <div class="container">
     <?php
     include 'block/header.php'
