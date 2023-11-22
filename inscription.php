@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -64,7 +68,7 @@
             $errors["pswd"] = "veuillez saisir le meme mot de passe";
         }
         if(count($errors) ==0){
-            header('location:moncompte.php');
+            header('Location: moncompte.php');
             exit();
         }
     }
@@ -139,7 +143,7 @@
             ?>
         </div>
         <label for="creaPswd">Creer votre mot de passe</label>
-        <input type="password" value="<?php
+        <input type="password" id="pswd" value="<?php
         if(!empty($_POST['creaPswd'])){
             echo($_POST['creaPswd']);
         }
@@ -151,6 +155,7 @@
             echo('is-valid');
         }
         ?>" name="creaPswd">
+
         <div class="invalid-feedback">
             <?php
             if(array_key_exists("creaPswd",$errors)){
@@ -160,7 +165,7 @@
 
         </div>
         <label for="pswd">Confirmation</label>
-        <input type="password" value="<?php
+        <input type="password" id="pswd2" value="<?php
         if(!empty($_POST['pswd'])){
             echo($_POST['pswd']);
         }
@@ -172,6 +177,7 @@
             echo('is-valid');
         }
         ?>" name="pswd">
+
         <div class="invalid-feedback">
             <?php
             if(array_key_exists("pswd",$errors)){
@@ -179,9 +185,13 @@
             }
             ?>
         </div>
-        <input type="submit" name="verif">
+        <input type="submit" class="btn btn-success btn-taille" name="verif">
     </form>
     </div>
 </div>
+<?php
+include 'block/cookie-consent.php';
+include'block/javascript.php'
+?>
 </body>
 </html>

@@ -1,8 +1,5 @@
 <?php
 session_start();
-
-
-
 $erreur = '';
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     if ($_POST['identifiant'] == "valentin" && $_POST["pswd"] == "onepiece") {
@@ -76,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 </form>
 </div>
 <?php
-include 'block/javascript.php';
+include 'block/js-connexion.php';
 ?>
 </body>
 </html>

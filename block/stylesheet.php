@@ -46,6 +46,24 @@ form{
         bottom: 76px;
         right: 7px;
     }
+    #eyes-crea,#eyes-close-crea{
+        position: absolute;
+        bottom: 128px;
+        right: 10px;
+    }
+    #eyes-confirm,#eyes-close-confirm{
+        position: absolute;
+        bottom: 51px;
+        right: 10px;
+    }
+    .btn-taille {
+        width: 130px;
+        margin: auto
+    }
+    h1 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
     }
 </style>
 

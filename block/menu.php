@@ -17,7 +17,7 @@ $firstName = 'Valentin';
                     <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Service</a>
+                    <a class="nav-link" href="service.php">Service</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="panier.php">panier</a>
@@ -37,7 +37,6 @@ $firstName = 'Valentin';
                     echo('<a class= "nav-link pe-3" href="connection.php">Connexion</a>');
                     echo('<a class= "nav-link " href="inscription.php">Inscription</a>');
                 }
-
 
                 ?>
             </div>
