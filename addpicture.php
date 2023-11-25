@@ -5,7 +5,7 @@ session_start();
 
 $allowedExtension = ["image/jpeg","image/png"];
 $errors = [];
-var_dump($_FILES["photos"]);
+
 
 if($_SERVER["REQUEST_METHOD"] == 'POST'){
     if($_FILES["photos"]["error"]!= 0){
@@ -59,18 +59,22 @@ include'block/theme.php'
     <form method="post" enctype="multipart/form-data">
         <input type="file" class="form-control" name="photos">
         <input type="submit" class="btn btn-success w-25">
-
         <div class="text-danger">
-            <ul>
-                <?php
-                foreach ($errors as $error){
-                    if(count($errors) != 0){
-                        echo('<li>'.$error.'</li>');
-                    }
 
-                }
+                <?php
+                if(count($errors) != 0){
+                    ?>
+                    <ul>
+                        <?php
+                    foreach ($errors as $error){
+                        echo('<li>'.$error.'</li>');
+                      }
+
                 ?>
             </ul>
+            <?php
+            }
+            ?>
         </div>
 
     </form>

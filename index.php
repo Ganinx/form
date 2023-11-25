@@ -31,9 +31,10 @@ include'block/theme.php'
         <h1 class="text-center">Accueil</h1>
 
         <?php
-        $images = scandir("image/")
-        for($i = 2; $i < count($images); $i++){
-            echo('<img src="'.$images[$i].'"><img>');
+        $dossier = "image/";
+        $images = scandir($dossier);
+        for($i =  2; $i < count($images); $i++){
+            echo('<img src="'.$dossier.$images[$i].'"><img>');
         }
         ?>
     </div>
